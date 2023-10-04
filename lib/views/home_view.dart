@@ -8,7 +8,7 @@ class HomeView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          elevation: 0,
+          elevation: 2,
           actions: const [
             Padding(
               padding: EdgeInsets.only(right: 8),

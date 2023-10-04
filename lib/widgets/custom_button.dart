@@ -16,6 +16,7 @@ class CustomButton extends StatelessWidget {
           child: Text(
         'Search',
         style: TextStyle(
+          fontWeight: FontWeight.bold,
           fontSize: 18,
             color: Colors.white,
              fontFamily: AutofillHints.addressCity),

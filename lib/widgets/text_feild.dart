@@ -9,6 +9,8 @@ class TextFieild extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextField(
       decoration: InputDecoration(
+        //filled: true,
+        //fillColor: Color(0XFF424769),
           contentPadding: const EdgeInsets.symmetric(
               vertical: 24, horizontal: 16), //! padding inside textfield
           hintText: 'Enter City Name', // hint text that show on text field
@@ -18,14 +20,18 @@ class TextFieild extends StatelessWidget {
           ),
           suffixIcon: const Icon(
             Icons.search,
-            color: Colors.white,
+            color: Color(0XFFF9B17A),
           ),
+          focusedBorder:OutlineInputBorder(
+              borderSide: const BorderSide(color: Color(0XFFF9B17A), width: 1),
+              borderRadius: BorderRadius.circular(16)), 
           border: OutlineInputBorder(
               borderSide: const BorderSide(color: Colors.white, width: 1),
               borderRadius: BorderRadius.circular(16)),
           enabledBorder: OutlineInputBorder(
               borderSide: const BorderSide(color: Colors.white, width: 1),
               borderRadius: BorderRadius.circular(16))),
+              
     );
   }
 }
