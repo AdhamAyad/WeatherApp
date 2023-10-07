@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 
 class TextFieild extends StatelessWidget {
   const TextFieild({
-    super.key,
+    super.key, this.onSubmitted,
   });
-
+  final void Function(String)? onSubmitted;
   @override
   Widget build(BuildContext context) {
     return TextField(
+      onSubmitted: onSubmitted,
       decoration: InputDecoration(
         //filled: true,
         //fillColor: Color(0XFF424769),

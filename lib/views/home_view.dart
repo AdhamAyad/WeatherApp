@@ -22,7 +22,7 @@ class HomeView extends StatelessWidget {
             fontSize: 24
           ),),
         ),
-        body:const HomeViewBody(),
+        body: HomeViewBody(),
       );
   }
 }

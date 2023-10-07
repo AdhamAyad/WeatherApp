@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:weather_app/cubits/cubit/weather_cubit.dart';
+import 'package:weather_app/widgets/error_weather.dart';
+import 'package:weather_app/widgets/no_weather.dart';
 import 'package:weather_app/widgets/text_feild.dart';
+import 'package:weather_app/widgets/weather_info.dart';
 
 import 'custom_button.dart';
 
@@ -25,47 +30,46 @@ class HomeViewBody extends StatelessWidget {
         begin: Alignment.topCenter,
         end: Alignment.bottomCenter,
       )),
-      child:const SingleChildScrollView(
-        child:  Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              SizedBox(
-                height: 40,
-              ),
-              Icon(
-                FontAwesomeIcons.cloudSun,
-                size: 80,
-                color: Colors.white,
-              ),
-              SizedBox(
-                height: 24,
-              ),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 8),
-                child: TextFieild(),
-              ),
-              SizedBox(
-                height: 24,
-              ),
-              CustomButton(),
-              SizedBox(
-                height: 24,
-              ),
-              // Divider(
-              //   color: Colors.white,
-              //   thickness: 1,
-              //   indent: 20,
-              //   endIndent: 20,
-              // ),
-              
-              Padding(
-                padding: EdgeInsets.only(top: 130),
-                child: Text(
-                  'No Weather Yet ! \n Search For It',
-                  style: TextStyle(color: Colors.white, fontSize: 24),
-                ),
-              )
-            ]),
+      child: SingleChildScrollView(
+        child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
+          const SizedBox(
+            height: 40,
+          ),
+          const Icon(
+            FontAwesomeIcons.cloudSun,
+            size: 80,
+            color: Colors.white,
+          ),
+          const SizedBox(
+            height: 24,
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8),
+            child: TextFieild(
+              onSubmitted: (data) {
+                BlocProvider.of<WeatherCubit>(context)
+                    .getWeather(cityName: data);
+              },
+            ),
+          ),
+          const SizedBox(
+            height: 24,
+          ),
+          const SizedBox(
+            height: 80,
+          ),
+          BlocBuilder<WeatherCubit, WeatherState>(builder: (context, state) {
+            if (state is NoWeatherState) {
+              return const NoWeather();
+            } else if (state is WeatherLoadedState) {
+              return WeatherInfo(
+                weather: state.weatherModel,
+              ); //! or → BlocProvider.of<WeatherCubit>(context).weatherModel
+            } else {
+              return const ErrorWeather();
+            }
+          })
+        ]),
       ),
     );
   }
